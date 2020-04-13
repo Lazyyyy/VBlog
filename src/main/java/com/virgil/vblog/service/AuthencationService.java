@@ -37,9 +37,11 @@ public class AuthencationService implements UserDetailsService {
     //实现该接口来查询对应的用户
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("前台用户名："+username);
         List<User> userList= userMapper.select();
         User user = null;
         for (User userone : userList){
+            System.out.println("数据库用户：" + userone.getUsername());
             if (userone.getUsername().equals(username)){
                 user = userone;
                 break;
@@ -53,7 +55,8 @@ public class AuthencationService implements UserDetailsService {
 
         //添加用户权限。此处应该实现一个与User关联的Role表，以指定用户权限
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ADMIN"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
         return new org.springframework.security.core.userdetails.User(user.getUsername()
                 ,user.getPasswd(),authorities);

@@ -26,7 +26,7 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping("/user/index")
+    @GetMapping("/admin/index")
     public String indexPage(){
         return "index";
     }

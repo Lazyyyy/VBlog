@@ -5,15 +5,15 @@
     <title>Login</title>
 </head>
 <body>
-    <form name="loginForm" th:action="@{/authentication/form}">
+    <form name="loginForm" th:action="@{/authentication/form}" th:method="post">
         <table>
             <tr>
                 <td>UserName：</td>
-                <td><input th:type="text"></td>
+                <td><input th:type="text" name="username" id="username" placeholder="UserName"></td>
             </tr>
             <tr>
                 <td>Password：</td>
-                <td><input th:type="password"></td>
+                <td><input th:type="password" name="password" id="password" placeholder="Password"></td>
             </tr>
             <tr>
                 <td><input th:type="submit" value="Login"></td>

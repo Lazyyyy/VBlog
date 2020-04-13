@@ -1,6 +1,7 @@
 package com.virgil.vblog.component;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -10,6 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @Author:VirgilWong
@@ -34,6 +38,39 @@ public class AuthenticationSucessHandler extends SimpleUrlAuthenticationSuccessH
     //重写handle方法，来指定重定向的url
     @Override
     protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        redirectStrategy.sendRedirect(request,response,"/admin");
+        String targetUrl = determineTargetUrl(authentication);
+
+        redirectStrategy.sendRedirect(request,response,targetUrl);
+    }
+
+    private String determineTargetUrl(Authentication authentication){
+        String url="";
+
+        //获取当前登录用户的角色权限合集
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+        //保存角色信息
+        List<String> roles = new ArrayList<>();
+
+        for (GrantedAuthority authority : authorities){
+            System.out.println("拥有的权限为：" + authority.getAuthority());
+            roles.add(authority.getAuthority());
+        }
+
+        //根据权限选择不同的Url，暂不做处理
+        url = "/admin/index";
+
+        return url;
+    }
+
+    //判断角色是否为ROLE_ADMIN
+    private boolean isAdmin(List<String> roles){
+        for (String str : roles){
+            if (str.equals("ROLE_ADMIN")){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -1,5 +1,7 @@
 package com.virgil.vblog.config;
 
+import com.virgil.vblog.component.AuthenticationSucessHandler;
+import com.virgil.vblog.config.provider.CustmProvider;
 import com.virgil.vblog.service.AuthencationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,15 +31,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private AuthencationService authencationService;
-
-    @Autowired
-    private AuthenticationProvider authenticationProvider;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private CustmProvider custmProvider;
+
+    @Autowired
+    private AuthenticationSucessHandler authenticationSucessHandler;
+
+
 
     //设置密码的加密方式
     @Bean
@@ -45,17 +48,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        //设置不要隐藏Not Found异常
-        provider.setHideUserNotFoundExceptions(false);
-        //重写config方法来添加自定义的认证方式
-        provider.setUserDetailsService(authencationService);
-        //设置密码加密程序认证
-        provider.setPasswordEncoder(passwordEncoder());
-        return provider;
-    }
 
 
 
@@ -64,19 +56,21 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/authentication/*","/login")
                 .permitAll()
-                .antMatchers("/user/**").hasAnyRole("USER")
+                .antMatchers("/user/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/authentication/login")//设置登录的路径（和Controller种的Mapping路径一致）
-                .loginProcessingUrl("/authentication/form")//暂不知道该方法的意义
-                .defaultSuccessUrl("/user/index");//设置登录成功跳转的界面
+                .successHandler(authenticationSucessHandler)
+                .loginProcessingUrl("/authentication/form")//处理前端数据的路径
+                .usernameParameter("username")
+                .passwordParameter("password");
     }
 
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider);
+        auth.authenticationProvider(custmProvider);
     }
 }

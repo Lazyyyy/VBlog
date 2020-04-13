@@ -24,6 +24,6 @@ import java.util.List;
 @Mapper
 @Repository
 public interface UserMapper {
-    @Select("select id,username,passwd from test")
+    @Select("select id,username,passwd from user")
     List<User> select();
 }
