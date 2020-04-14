@@ -1,10 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello Security</title>
+    <title>V-Blog</title>
+    <link th:href="@{/css/base.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/media.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-Hello Spring Boot and Mybaits
+    <div class="ibody">
+        <header>
+            <h1>V-BLOG</h1>
+            <h2>My first blog use Spring Boot</h2>
+            <div class="logo">
+                <a th:href="@{/user/index}"></a>
+            </div>
+            <nav id="topnav">
+                <a>Index</a>
+                <a>About</a>
+                <a>Directory</a>
+            </nav>
+        </header>
+        <article>
+            <div class="banner">
+                <ul class="texts">
+                    <p>God Bless you!</p>
+                </ul>
+            </div>
+            <div class="blogs">
+                <h2>
+                    <p><span>Recommended</span> Article</p>
+                </h2>
+                <!--单项文章列表，寻找方法由后端控制生成-->
+                <div class="blogs">
+                    <h3>Article title</h3>
+                    <figure><img src="/static/img/001.jpg"></figure>
+                    <ul>
+                        <p>Thesis</p>
+                        <a>Read Article</a>
+                    </ul>
+                    <p class="autor">
+                        <span>Author:Virgil Wong</span>
+                        <span>Classification:[<a>Spring</a>]</span>
+                        <span>Browse:<a>99</a></span>
+                        <span>Comment:<a>99</a></span>
+                    </p>
+                </div>
+            </div>
+        </article>
+        <aside>
+            <div class="avatar">
+                <a><span>About me</span></a>
+            </div>
+            <div class="topspaceinfo">
+                <h1>Ambition</h1>
+                <p>I hope I can become a Java technology expert</p>
+            </div>
+            <div class="about_c">
+                <p>ID:Devil Never Cry</p>
+                <p>Occupation:Junior programmer</p>
+                <p>WeChat:123445556</p>
+                <p>Email:199777@gmail.com</p>
+            </div>
+            <div class="bdsharebuttonbox">
+                <a href="#" class="bds_qzone" data-cmd="qzone" title="Share to Qzone"></a>
+                <a href="#" class="bds_tsina" data-cmd="tsina" title="Share to sina"></a>
+                <a href="#" class="bds_tqq" data-cmd="tqq" title="Share to qq"></a>
+                <a href="#" class="bds_renren" data-cmd="renren" title="Share to renren"></a>
+                <a href="#" class="bds_weixin" data-cmd="weixin" title="Share to Wechat"></a>
+                <a href="#" class="bds_more" data-cmd="more"></a>
+            </div>
+            <div class="tj_news">
+                <h2>
+                    <p class="tj_t1">Recently</p>
+                </h2>
+                <ul>
+                    <!--这里也要后端来控制显示近期更新的文章-->
+                    <li><a href="#">Spring Boot</a></li>
+                </ul>
+                <h2>
+                    <p class="tj_t2">Popular</p>
+                </h2>
+                <ul>
+                    <!--同样需要后端来控制-->
+                    <li><a href="#">Java Web</a></li>
+                </ul>
+            </div>
+            <div class="links">
+                <h2>
+                    <p>Friendly</p>
+                </h2>
+                <ul>
+                    <li><a href="#">My CSDN Blog</a></li>
+                    <li><a href="#">My Github</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
 </body>
 </html>

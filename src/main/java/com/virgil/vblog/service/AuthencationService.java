@@ -55,6 +55,7 @@ public class AuthencationService implements UserDetailsService {
 
         //添加用户权限。此处应该实现一个与User关联的Role表，以指定用户权限
         List<GrantedAuthority> authorities = new ArrayList<>();
+        //Sercurity的config的hasAnyRole方法会给权限添加ROLE_的前缀，所以必须要加上该前缀
         authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 

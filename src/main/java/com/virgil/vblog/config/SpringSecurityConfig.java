@@ -58,10 +58,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/user/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("**.html").hasAnyRole("NONE")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/authentication/login")//设置登录的路径（和Controller种的Mapping路径一致）
+                .loginPage("/authentication/login")//设置登录的路径（和Controller中的Mapping路径一致）
                 .successHandler(authenticationSucessHandler)
                 .loginProcessingUrl("/authentication/form")//处理前端数据的路径
                 .usernameParameter("username")
