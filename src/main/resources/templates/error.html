@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oops!</title>
+    <link th:href="@{/css/error.css}" rel="stylesheet" type="text/css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="jumbotron mx-auto jumbotronalign" style="background: rgba(255,255,255,0);
+    width: 600px;" >
+        <h2 class="text-center" style="font-size: 50pt;color: darkorange">Oops!</h2>
+        <p style="color: darkorange;font-size: 12pt">There seems to be a problem with the page you requested
+            (<span th:text="${path}"></span>).</p>
+        <p th:text="${'Details: ' + message}" style="color: darkorange;font-size: 10pt" class="text-center"></p>-->
+    </div>
+</body>
+</html>

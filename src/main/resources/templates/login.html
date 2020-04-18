@@ -3,52 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/login.css" rel="stylesheet" type="text/css" >
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <!--<form name="loginForm" th:action="@{/authentication/form}" th:method="post">
-        <table>
-            <tr>
-                <td>UserName：</td>
-                <td><input th:type="text" name="username" id="username" placeholder="UserName"></td>
-            </tr>
-            <tr>
-                <td>Password：</td>
-                <td><input th:type="password" name="password" id="password" placeholder="Password"></td>
-            </tr>
-            <tr>
-                <td><input th:type="submit" value="Login"></td>
-                <td><input th:type="reset" value="Reset"></td>
-            </tr>
-        </table>
-    </form>-->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-offset-3 col-md-6">
-                <form class="form-horizontal" name="loginForm" th:action="@{/authentication/form}" th:method="post">
-                    <span class="heading">Admin Login</span>
-                    <div class="form-group">
-                        <input th:type="text" class="form-control" id="username" name="username" placeholder="User Name">
-                        <i class="fa fa-user"></i>
-                    </div>
-                    <div class="form-group help">
-                        <input th:type="password" class="form-control" id="password" name="password" placeholder="Password">
-                        <i class="fa fa-lock"></i>
-                        <a href="#" class="fa fa-question-circle"></a>
-                    </div>
-                    <div class="form-group">
-                        <div class="main-checkbox">
-                            <input type="checkbox" value="None" id="checkbox1" name="check"/>
-                            <label for="checkbox1"></label>
-                        </div>
-                        <span class="text">Remember</span>
-                        <button th:type="submit" class="btn btn-default" value="Login">Login</button>
-                    </div>
-                </form>
+    <div class="jumbotron mx-auto jumbotronalign" style="background: rgba(255,255,255,0.5);
+    width: 400px;" >
+        <h2 class="text-center">Login Page</h2>
+        <form th:action="@{/authentication/form}" th:method="post">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Username</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Your username" id="username" name="username">
             </div>
-        </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Password</span>
+                </div>
+                <input type="password" class="form-control" placeholder="Your paassword" id="password" name="password">
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck" name="remember">
+                <label class="custom-control-label" for="customCheck">Remember</label>
+            </div>
+            <button type="submit" class="btn btn-primary float-right">Login</button>
+        </form>
     </div>
 </body>
 </html>
